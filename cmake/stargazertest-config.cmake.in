@@ -1,0 +1,54 @@
+# StarGazerTest CMake config file
+#
+# This file sets the following variables:
+# StarGazerTest_FOUND - Always TRUE.
+# StarGazerTest_INCLUDE_DIRS - Directories containing the StarGazerTest include files.
+# StarGazerTest_IDL_DIRS - Directories containing the StarGazerTest IDL files.
+# StarGazerTest_LIBRARIES - Libraries needed to use StarGazerTest.
+# StarGazerTest_DEFINITIONS - Compiler flags for StarGazerTest.
+# StarGazerTest_VERSION - The version of StarGazerTest found.
+# StarGazerTest_VERSION_MAJOR - The major version of StarGazerTest found.
+# StarGazerTest_VERSION_MINOR - The minor version of StarGazerTest found.
+# StarGazerTest_VERSION_REVISION - The revision version of StarGazerTest found.
+# StarGazerTest_VERSION_CANDIDATE - The candidate version of StarGazerTest found.
+
+message(STATUS "Found StarGazerTest-@PROJECT_VERSION@")
+set(StarGazerTest_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(StarGazerTest_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(StarGazerTest_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(StarGazerTest_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(StarGazerTest_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(StarGazerTest_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(StarGazerTest_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(StarGazerTest_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(StarGazerTest_VERSION @PROJECT_VERSION@)
+set(StarGazerTest_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(StarGazerTest_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(StarGazerTest_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(StarGazerTest_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
